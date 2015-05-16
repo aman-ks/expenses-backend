@@ -12,7 +12,10 @@ module.exports = {
   		approved : 'boolean',
   		type : 'string',
   		totalAmount : 'float',
-  		image : 'string' // URL of S3 instance
+  		image : 'string',
+  		belongsToUser : {
+  			model : 'user'
+  		} // URL of S3 instance
   }
 };
 

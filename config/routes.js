@@ -31,7 +31,7 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
+  '/visualise':{view: 'visualise'},
   '/': {
     view: 'homepage'
   }

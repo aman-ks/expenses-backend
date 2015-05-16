@@ -11,7 +11,10 @@ module.exports = {
   		name : 'string',
   		email : 'string',
   		phone : 'integer',
-  		allExpenses : {model: 'expense'}
+  		listOfExpenses : 
+  		{collection: 'expense',
+  		 via: 'belongsToUser'
+  		}
   }
 };
 
