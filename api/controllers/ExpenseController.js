@@ -6,6 +6,11 @@
  */
 
 module.exports = {
-	
+	// image: function(req, res) {
+	// 	var urlData = req.query.url;
+	// 	Expense.update({key: value}, {url: urlData}).exec(function(err, doc) {
+	// 			return;
+	// 	});
+	// }	
 };
 
