@@ -13,15 +13,16 @@ module.exports = {
 	// 	});
 	// }
 	   parseORM: function(req, res) {
-	   	var url = 'https://www.idolondemand.com/sample-content/documents/hp_q1_2013.pdf';//S3 response
+	   	var url = req.query.url;//S3 response
 	   	var hpAPIBaseurl = 'https://api.idolondemand.com/1/api/async/ocrdocument/v1?url='
 	   	var apikey = '29ea712d-bed0-4786-bc3e-20021704f652';
 	   	var hpAPIFinalurl = hpAPIBaseurl + url + '&apikey=' + apikey;
-	   	var amount = 100.0;
-	   	var vendorName = 'Uber';
+	   	var amount;
+	   	var vendorName;
+	   	var obj = [];
 	   	var type = 'Travel';
 	   	var approved = 'notApproved';
-	   	var async = require('async');
+	   	
 	   	var request = require('request')
 	   	request(hpAPIFinalurl,function(err, response, body){
 	   		if(err) console.log(err);
@@ -40,9 +41,11 @@ module.exports = {
 	   			//console.log('text:',ob);
 
 	   			var lines = ob.split('\n');
+	   			obj.push({vendorName: lines[0]})
+	   			console.log('Line 0 : ',lines[0]);
 	   			_.forEach(lines, function(eachItem)
 	   			{
-	   				// console.log(eachItem);
+	   				//console.log(eachItem);
 	   				listOfWords = eachItem.split(' ');
 	   				// console.log(words)
 	   				var flag = 0;
@@ -54,7 +57,7 @@ module.exports = {
 	   					 	flag = 1;
 	   					 	var r = /\d+.\d+/;
 	   					 	amount = eachItem.match(r);
-	   					 	console.log(amount);
+	   					 	console.log('amount: ',amount);
 	   					}
 	   					
 	   				});
@@ -72,7 +75,10 @@ module.exports = {
 	   		//Parser
 
 	   		//Must type cast amount to float before sending?
-	   		res.json({"vendorName":vendorName, "approved":approved, "type":type, "totalAmount":amount});
+	   		setTimeout(function(){  
+	   			console.log("dahsds", obj)
+	   		res.json({"vendorName":obj[0].vendorName, "approved":approved, "type":type, "totalAmount":amount});
+	   		}, 3000);
 	   		// Putting this data in the next screen for verification by user
 	   		// If verified, we put this data into an Expense object, using the expnese/create? endpoint
 	   	});
