@@ -76,7 +76,7 @@ module.exports = {
 
 	   		//Must type cast amount to float before sending?
 	   		setTimeout(function(){  
-	   			console.log("dahsds", obj)
+	   			console.log("dahsds", obj);
 	   		res.json({"vendorName":obj[0].vendorName, "approved":approved, "type":type, "totalAmount":amount});
 	   		}, 3000);
 	   		// Putting this data in the next screen for verification by user
